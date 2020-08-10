@@ -11,43 +11,26 @@
 
 
     <include layout="@layout/header"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+
         <LinearLayout
+            android:id="@+id/theFiller"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="THIS IS THE PRIMARY ACTIVITY">
-            </TextView>
 
-            <Button
-                android:id="@+id/buttonOne"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BEHOLD BUTTON ONE">
-
-            </Button>
-
-            <Button
-                android:id="@+id/buttonTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BEHOLD BUTTON TWO">
-
-            </Button>
 
 
         </LinearLayout>
 
 
-
     </ScrollView>
-    <include layout="@layout/footer"/>
+
+
 
 </LinearLayout>

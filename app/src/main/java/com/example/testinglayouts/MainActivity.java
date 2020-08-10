@@ -2,17 +2,24 @@ package com.example.testinglayouts;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
 
     Button buttonOne, buttonTwo;
     Fragment fragmentOne, fragmentTwo;
-
+    FragmentManager fm;
 
 
     @Override
@@ -20,23 +27,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonOne = findViewById(R.id.buttonOne);
-        buttonOne.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.fragment_test1);
+        if (findViewById(R.id.theFiller) != null) {
+            if(savedInstanceState != null){
+                return;
             }
-        });
 
-        buttonTwo = findViewById(R.id.buttonTwo);
-        buttonTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.fragment_test2);
-            }
-        });
+            MainFragment firstFragment = new MainFragment();
+            firstFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.theFiller, firstFragment).commit();
+        }
+
+    }
 
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.new_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

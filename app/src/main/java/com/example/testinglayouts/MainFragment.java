@@ -3,6 +3,7 @@ package com.example.testinglayouts;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
@@ -12,10 +13,10 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TestFragment2#newInstance} factory method to
+ * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment2 extends Fragment implements View.OnClickListener {
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,9 +26,10 @@ public class TestFragment2 extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private FragmentManager fm;
+    FragmentManager fm;
+    Button button;
 
-    public TestFragment2() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +39,11 @@ public class TestFragment2 extends Fragment implements View.OnClickListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment test2.
+     * @return A new instance of fragment main.
      */
     // TODO: Rename and change types and number of parameters
-    public static TestFragment2 newInstance(String param1, String param2) {
-        TestFragment2 fragment = new TestFragment2();
+    public static MainFragment newInstance(String param1, String param2) {
+        MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -56,34 +58,34 @@ public class TestFragment2 extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        Button button1 = (Button) view.findBy
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_test1,
-                container, false);
-        Button button = (Button) view.findViewById(R.id.backtoMain2);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                getFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
+        Button b = (Button) v.findViewById(R.id.buttonOne);
+        b.setOnClickListener(this);
+        return v;
 
-            }
-        });
 
-        return view;
     }
+
 
 
     @Override
     public void onClick(View view) {
+        TestFragment1 test1 = new TestFragment1();
+        Bundle args = new Bundle();
+        args.putInt("Bogus", 2);
+        test1.setArguments(args);
 
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.theFiller, test1);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

@@ -3,25 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    tools:context=".MainFragment"
     android:orientation="vertical"
-    tools:context=".TestFragment1">
+    android:gravity="center_horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/WELCOME_TO_FRAGMENT_ONE" />
+        android:text="THIS IS THE PRIMARY ACTIVITY"></TextView>
 
     <Button
-        android:id="@+id/backtoMain1"
+        android:id="@+id/buttonOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back_to_main_menu" />
+        android:text="BEHOLD BUTTON ONE">
+
+    </Button>
+
     <Button
-        android:id="@+id/changeTo2"
+        android:id="@+id/buttonTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fragment_2" />
+        android:text="BEHOLD BUTTON TWO">
+
+    </Button>
 
 </LinearLayout>
