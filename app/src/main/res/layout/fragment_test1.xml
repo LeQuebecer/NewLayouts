@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:id="@+id/testFragmentUno"
     tools:context=".TestFragment1">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,11 +14,12 @@
         android:layout_height="wrap_content"
         android:text="@string/WELCOME_TO_FRAGMENT_ONE" />
 
-    <Button
-        android:id="@+id/backtoMain1"
+   <Button
+        android:id="@+id/returnToMainOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back_to_main_menu" />
+
     <Button
         android:id="@+id/changeTo2"
         android:layout_width="wrap_content"

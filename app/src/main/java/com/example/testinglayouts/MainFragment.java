@@ -77,15 +77,13 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        TestFragment1 test1 = new TestFragment1();
-        Bundle args = new Bundle();
-        args.putInt("Bogus", 2);
-        test1.setArguments(args);
+        ((MainActivity) getActivity()).getFragmentOne(view);
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.theFiller, test1);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
+
+    public void onClickTwo(View view) {
+        ((MainActivity) getActivity()).getFragmentTwo(view);
+
+    }
+
 }

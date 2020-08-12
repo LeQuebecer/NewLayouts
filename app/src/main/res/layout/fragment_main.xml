@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:id="@+id/theMain">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         android:id="@+id/buttonOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:text="BEHOLD BUTTON ONE">
 
     </Button>
@@ -24,6 +26,7 @@
         android:id="@+id/buttonTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickTwo"
         android:text="BEHOLD BUTTON TWO">
 
     </Button>

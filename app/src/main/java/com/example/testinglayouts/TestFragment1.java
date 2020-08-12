@@ -1,10 +1,12 @@
 package com.example.testinglayouts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,20 +20,30 @@ import android.widget.Button;
  * Use the {@link TestFragment1#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment1 extends Fragment implements View.OnClickListener {
+public class TestFragment1 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     Menu menu;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private FragmentOneListener listener;
+    private Button mainButton, otherButton;
+
+
+    //This is my interface
+    public interface FragmentOneListener {
+        //Each of these methods will direct me to a different fragment screen
+        public void mainScreen();
+        //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
+        public void otherScreen();
+    }
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Object MenuInflater;
-    private FragmentManager fm;
-    private View view;
+
 
 
     public TestFragment1() {
@@ -59,32 +71,63 @@ public class TestFragment1 extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Button one = (Button) view.findViewById();
-        one.setOnClickListener(this); // calling onClick() method
-        Button two = (Button) view.findViewById();
-        two.setOnClickListener(this);
-        Button three = (Button) view.findViewById(R.id.changeTo1);
-        three.setOnClickListener((View.OnClickListener) this);
+        //Get back some arguments
+        int someInt = getArguments().getInt("SomeInt", 0);
+        String someTitle = getArguments().getString("Some String", "");
+//
+//        button = (Button) view.findViewById(R.id.backtoMain1);
+//        button.setOnClickListener(this); // calling onClick() method
+//        Button two = (Button) view.findViewById(R.id.changeTo2);
+//        two.setOnClickListener(this);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_test1, container, false);
+        mainButton = v.findViewById(R.id.returnToMainOne);
+        otherButton = v.findViewById(R.id.changeTo2);
+        mainButton.setOnClickListener(new View.OnClickListener(){
+          @Override
+            public void onClick(View v){
+              //The issue is that THIS seems to be null. Why is that?
+              if(listener != null){
+                  System.out.println("Why is the Listener Not Null, Dave?");
+                  listener.mainScreen();
+              }else{
+                  System.out.println("Why is the Listener Null, Dave?");
+              }
 
-        View view = inflater.inflate(R.layout.fragment_test1,
-                container, false);
-        Button button = (Button) view.findViewById(R.id.backtoMain1);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+          }
+
+        });
+
+        otherButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                getFragmentManager().popBackStack(null, fm.POP_BACK_STACK_INCLUSIVE);
-
+            public void onClick(View view) {
+                listener.otherScreen();
             }
         });
-        return view;
+
+
+        return v;
     }
+
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentOneListener) {
+            listener = (FragmentOneListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement FragmentAListener");
+        }
+    }
+
 
 
 
