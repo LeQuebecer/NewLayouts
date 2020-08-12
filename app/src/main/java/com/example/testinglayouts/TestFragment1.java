@@ -37,7 +37,7 @@ public class TestFragment1 extends Fragment {
         //Each of these methods will direct me to a different fragment screen
         public void mainScreen();
         //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
-        public void otherScreen();
+        public void screenTwo();
     }
 
     // TODO: Rename and change types of parameters
@@ -107,7 +107,7 @@ public class TestFragment1 extends Fragment {
         otherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.otherScreen();
+                listener.screenTwo();
             }
         });
 

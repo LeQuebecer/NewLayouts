@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TestFragment2"
-    android:id="@+id/testFragmentDos">
+    android:id="@+id/testFragmentDos"
+    android:gravity="center_horizontal">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -17,13 +18,11 @@
         android:id="@+id/backtoMain2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClick"
         android:text="@string/back_to_main_menu" />
 
     <Button
         android:id="@+id/changeTo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickTwo"
         android:text="@string/fragment_1" />
 </LinearLayout>

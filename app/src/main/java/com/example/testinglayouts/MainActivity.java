@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import java.util.logging.Logger;
 
-public class MainActivity extends AppCompatActivity implements TestFragment1.FragmentOneListener{
+public class MainActivity extends AppCompatActivity implements TestFragment1.FragmentOneListener, TestFragment2.FragmentTwoListener, MainFragment.FragmentMainListener{
 
 
 
@@ -58,15 +58,15 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
 
     public void getFragmentOne(View v){
 
-        TestFragment1 newFragment = new TestFragment1();
+
         Bundle args = new Bundle();
-        newFragment.setArguments(args);
+        testFragment1.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 // Replace whatever is in the fragment_container view with this fragment,
 // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.theFiller, newFragment);
+        transaction.replace(R.id.theFiller, testFragment1);
         transaction.addToBackStack(null);
 
 // Commit the transaction
@@ -75,15 +75,15 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
 
     public void getFragmentTwo(View v){
 
-        TestFragment2 newFragment = new TestFragment2();
+
         Bundle args = new Bundle();
-        newFragment.setArguments(args);
+        testFragment2.setArguments(args);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 // Replace whatever is in the fragment_container view with this fragment,
 // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.theFiller, newFragment);
+        transaction.replace(R.id.theFiller, testFragment2);
         transaction.addToBackStack(null);
 
 // Commit the transaction
@@ -119,7 +119,17 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
     }
 
     @Override
-    public void otherScreen() {
+    public void screenOne() {
+        Bundle args = new Bundle();
+        testFragment1.setArguments(args);
+        fmt = getSupportFragmentManager().beginTransaction();
+        fmt.replace(R.id.theFiller, testFragment1);
+        fmt.addToBackStack(null);
+        fmt.commit();
+    }
+
+    @Override
+    public void screenTwo() {
 
         Bundle args = new Bundle();
         testFragment2.setArguments(args);

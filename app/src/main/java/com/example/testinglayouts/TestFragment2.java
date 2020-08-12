@@ -1,5 +1,6 @@
 package com.example.testinglayouts;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,12 +16,24 @@ import android.widget.Button;
  * Use the {@link TestFragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment2 extends Fragment implements View.OnClickListener {
+public class TestFragment2 extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentTwoListener listener;
+    Button buttonOne, buttonTwo;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+
+    //This is my interface
+    public interface FragmentTwoListener {
+        //Each of these methods will direct me to a different fragment screen
+        public void mainScreen();
+        //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
+        public void screenOne();
+    }
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,22 +78,60 @@ public class TestFragment2 extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_test1,
+        View view = inflater.inflate(R.layout.fragment_test2,
                 container, false);
+
+        buttonOne = view.findViewById(R.id.backtoMain2);
+        buttonTwo = view.findViewById(R.id.changeTo1);
+
+        buttonOne.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //The issue is that THIS seems to be null. Why is that?
+                if(listener != null){
+                    System.out.println("Why is the Listener Not Null, Dave?");
+                    listener.mainScreen();
+                }else{
+                    System.out.println("Why is the Listener Null, Dave?");
+                }
+
+            }
+
+        });
+
+        buttonTwo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //The issue is that THIS seems to be null. Why is that?
+                if(listener != null){
+                    System.out.println("Why is the Listener Not Null, Dave?");
+                    listener.screenOne();
+                }else{
+                    System.out.println("Why is the Listener Null, Dave?");
+                }
+
+            }
+
+        });
 
 
         return view;
     }
 
-    public void onClick(View view) {
-        ((MainActivity) getActivity()).getFragmentMain(view);
 
+    //This seems to attach the Listener and is mandatory for it to exist.
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentTwoListener) {
+            listener = (FragmentTwoListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement FragmentAListener");
+        }
     }
 
-    public void onClickTwo(View view) {
-        ((MainActivity) getActivity()).getFragmentOne(view);
-
-    }
 
 
 }
