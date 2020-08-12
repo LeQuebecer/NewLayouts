@@ -24,17 +24,13 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private FragmentMainListener listener;
+    private CommonMethods listener;
+    private FragmentMainListener listener2;
     Button buttonOne, buttonTwo, buttonThree;
     private EditText enterName;
 
     //This is my interface
     public interface FragmentMainListener {
-        //Each of these methods will direct me to a different fragment screen
-        public void screenOne();
-        //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
-        public void screenTwo();
-        //The method below is used to transfer information back and forth via the MainActivity
         public void getTheString();
 
     }
@@ -119,11 +115,11 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v){
                 //The issue is that THIS seems to be null. Why is that?
-                if(listener != null){
+                if(listener2 != null){
                     System.out.println("Why is the Listener Not Null, Dave?");
-                    listener.getTheString();
+                    listener2.getTheString();
                 }else{
-                    System.out.println("Why is the Listener Null, Dave?");
+                    System.out.println("Why is the Listener2 Null, Dave?");
                 }
 
             }
@@ -141,11 +137,17 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentMainListener) {
-            listener = (FragmentMainListener) context;
+        if (context instanceof CommonMethods) {
+            listener = (CommonMethods) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement FragmentAListener");
+        }
+        if(context instanceof FragmentMainListener){
+            listener2 = (FragmentMainListener) context;
+        }else {
+            throw new RuntimeException(context.toString()
+                    + " must implement FragmentMainListener");
         }
     }
 

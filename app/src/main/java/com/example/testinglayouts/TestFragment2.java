@@ -21,7 +21,7 @@ public class TestFragment2 extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private FragmentTwoListener listener;
+    private CommonMethods listener;
     Button buttonOne, buttonTwo;
     TextView textTwo;
     private static final String ARG_PARAM1 = "param1";
@@ -127,8 +127,8 @@ public class TestFragment2 extends Fragment{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentTwoListener) {
-            listener = (FragmentTwoListener) context;
+        if (context instanceof CommonMethods) {
+            listener = (CommonMethods) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement FragmentAListener");

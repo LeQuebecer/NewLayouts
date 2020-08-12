@@ -31,7 +31,7 @@ public class TestFragment1 extends Fragment {
     Menu menu;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private FragmentOneListener listener;
+    private CommonMethods listener;
     private TestInterfaces interfacesListener;
     private Button mainButton, otherButton;
     TextView textOne;
@@ -123,8 +123,8 @@ public class TestFragment1 extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentOneListener) {
-            listener = (FragmentOneListener) context;
+        if (context instanceof CommonMethods) {
+            listener = (CommonMethods) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement FragmentAListener");

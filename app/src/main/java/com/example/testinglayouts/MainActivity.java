@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import java.util.logging.Logger;
 
-public class MainActivity extends AppCompatActivity implements TestFragment1.FragmentOneListener, TestFragment2.FragmentTwoListener, MainFragment.FragmentMainListener{
+public class MainActivity extends AppCompatActivity implements CommonMethods, MainFragment.FragmentMainListener{
 
 
 
