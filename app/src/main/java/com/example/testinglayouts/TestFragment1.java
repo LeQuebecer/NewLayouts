@@ -14,6 +14,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +32,9 @@ public class TestFragment1 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FragmentOneListener listener;
+    private TestInterfaces interfacesListener;
     private Button mainButton, otherButton;
+    TextView textOne;
 
 
     //This is my interface
@@ -38,6 +43,7 @@ public class TestFragment1 extends Fragment {
         public void mainScreen();
         //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
         public void screenTwo();
+        public void setText();
     }
 
     // TODO: Rename and change types of parameters
@@ -74,11 +80,7 @@ public class TestFragment1 extends Fragment {
         //Get back some arguments
         int someInt = getArguments().getInt("SomeInt", 0);
         String someTitle = getArguments().getString("Some String", "");
-//
-//        button = (Button) view.findViewById(R.id.backtoMain1);
-//        button.setOnClickListener(this); // calling onClick() method
-//        Button two = (Button) view.findViewById(R.id.changeTo2);
-//        two.setOnClickListener(this);
+
 
     }
 
@@ -87,6 +89,7 @@ public class TestFragment1 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_test1, container, false);
+        textOne = v.findViewById(R.id.textOne);
         mainButton = v.findViewById(R.id.returnToMainOne);
         otherButton = v.findViewById(R.id.changeTo2);
         mainButton.setOnClickListener(new View.OnClickListener(){
@@ -111,11 +114,11 @@ public class TestFragment1 extends Fragment {
             }
         });
 
+        //This should set the
+        listener.setText();
 
         return v;
     }
-
-
 
     @Override
     public void onAttach(Context context) {
@@ -126,9 +129,16 @@ public class TestFragment1 extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement FragmentAListener");
         }
+
     }
 
 
+    public void setTextString(String s){
+        if (textOne != null){
+            textOne.setText(s);
+        }else{
+            System.out.printf("textOne is utterly empty");
+        }
 
-
+    }
 }

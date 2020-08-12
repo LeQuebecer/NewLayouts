@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +25,8 @@ public class MainFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FragmentMainListener listener;
-    Button buttonOne, buttonTwo;
+    Button buttonOne, buttonTwo, buttonThree;
+    private EditText enterName;
 
     //This is my interface
     public interface FragmentMainListener {
@@ -32,13 +34,15 @@ public class MainFragment extends Fragment {
         public void screenOne();
         //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
         public void screenTwo();
+        //The method below is used to transfer information back and forth via the MainActivity
+        public void getTheString();
+
     }
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    FragmentManager fm;
-    Button button;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -77,8 +81,10 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
+        enterName = v.findViewById(R.id.enterName);
         buttonOne = v.findViewById(R.id.buttonOne);
         buttonTwo = v.findViewById(R.id.buttonTwo);
+        buttonThree = v.findViewById(R.id.changeTheName);
         buttonOne.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -109,6 +115,23 @@ public class MainFragment extends Fragment {
 
         });
 
+        buttonThree.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //The issue is that THIS seems to be null. Why is that?
+                if(listener != null){
+                    System.out.println("Why is the Listener Not Null, Dave?");
+                    listener.getTheString();
+                }else{
+                    System.out.println("Why is the Listener Null, Dave?");
+                }
+
+            }
+
+        });
+
+
+
 
         return v;
 
@@ -126,6 +149,18 @@ public class MainFragment extends Fragment {
         }
     }
 
+
+    //So when this is called, it sets the string
+    public String getString(){
+        String response = "Empty";
+        if(enterName != null){
+            response = enterName.getText().toString();
+            return response;
+        }else{
+            System.out.println("Nah man it ain't working");
+        }
+        return response;
+    }
 
 
 }

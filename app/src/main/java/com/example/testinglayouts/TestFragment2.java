@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +23,7 @@ public class TestFragment2 extends Fragment{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private FragmentTwoListener listener;
     Button buttonOne, buttonTwo;
+    TextView textTwo;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -32,6 +34,7 @@ public class TestFragment2 extends Fragment{
         public void mainScreen();
         //This above should call all the shit I need to do for the FragmentTransaction to dump me back into main. Below the same for screen Two
         public void screenOne();
+        public void setText();
     }
 
 
@@ -80,7 +83,7 @@ public class TestFragment2 extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_test2,
                 container, false);
-
+        textTwo = view.findViewById(R.id.textTwo);
         buttonOne = view.findViewById(R.id.backtoMain2);
         buttonTwo = view.findViewById(R.id.changeTo1);
 
@@ -114,7 +117,7 @@ public class TestFragment2 extends Fragment{
 
         });
 
-
+        listener.setText();
         return view;
     }
 
@@ -133,5 +136,13 @@ public class TestFragment2 extends Fragment{
     }
 
 
+    public void setTextTwoString(String s){
+        if(textTwo != null){
+            textTwo.setText(s);
+        }else{
+            System.out.println("textTwo is empty");
+        }
+
+    }
 
 }

@@ -21,9 +21,7 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
     private TestFragment1 testFragment1;
     private TestFragment2 testFragment2;
     private MainFragment mainFragment;
-    static Logger LOG = Logger.getLogger(MainActivity.class.getName());
-    Button buttonOne, buttonTwo;
-    FragmentManager fm;
+    private String theText;
     FragmentTransaction fmt;
 
 
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
                 return;
             }
 
-            MainFragment mainFragment = new MainFragment();
             mainFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().add(R.id.theFiller, mainFragment).commit();
         }
@@ -56,54 +53,6 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void getFragmentOne(View v){
-
-
-        Bundle args = new Bundle();
-        testFragment1.setArguments(args);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.theFiller, testFragment1);
-        transaction.addToBackStack(null);
-
-// Commit the transaction
-        transaction.commit();
-    }
-
-    public void getFragmentTwo(View v){
-
-
-        Bundle args = new Bundle();
-        testFragment2.setArguments(args);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.theFiller, testFragment2);
-        transaction.addToBackStack(null);
-
-// Commit the transaction
-        transaction.commit();
-    }
-
-
-    public void getFragmentMain(View v){
-
-
-        Bundle args = new Bundle();
-        mainFragment.setArguments(args);
-        fmt = getSupportFragmentManager().beginTransaction();
-        fmt.replace(R.id.theFiller, mainFragment);
-        fmt.addToBackStack(null);
-
-
-// Commit the transaction
-        fmt.commit();
-    }
 
 
     @Override
@@ -137,5 +86,15 @@ public class MainActivity extends AppCompatActivity implements TestFragment1.Fra
         fmt.replace(R.id.theFiller, testFragment2);
         fmt.addToBackStack(null);
         fmt.commit();
+    }
+
+    //The tricky part here is that I need a listener, but I also need it to EXECUTE this information.
+    public void getTheString(){
+        theText = mainFragment.getString();
+    }
+
+    public void setText(){
+        testFragment1.setTextString(theText);
+        testFragment2.setTextTwoString(theText);
     }
 }
